@@ -45,17 +45,6 @@ phases:
       - echo Running SonarQube scan...
       - cd $BACKEND_DIR && mvn clean verify sonar:sonar -Dsonar.projectKey=final-project -Dsonar.host.url=http://18.212.13.244 -Dsonar.login=sqp_dd9f0bffece8b47907435ccddd8683d430818644 && cd -
 
-  install:
-    runtime-versions:
-      java: corretto17
-    commands:
-      - echo Installing Maven and Docker...
-      - yum install -y maven docker
-      - echo Installing Trivy...
-      - wget https://github.com/aquasecurity/trivy/releases/download/v0.63.0/trivy_0.63.0_Linux-64bit.tar.gz
-      - tar -zxvf trivy_0.63.0_Linux-64bit.tar.gz
-      - mv trivy /usr/local/bin/
-
   post_build:
     commands:
       - echo Pushing Docker images to ECR...
